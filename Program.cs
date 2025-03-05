@@ -80,11 +80,11 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 var app = builder.Build();
 app.UseCors("AllowSpecificOrigin");
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+// }
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -95,7 +95,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 //שליפת כל המשימות 
-app.MapGet("/", (ToDoDbContext db) => db.Items.ToListAsync());
+app.MapGet("/", (ToDoDbContext db) => "its running!!!!!!!😁😁😁");
+// app.MapGet("/", (ToDoDbContext db) => db.Items.ToListAsync());
 //שליפה ע"פ מזהה של משתמש
 app.MapGet("/byId", [Authorize] async (ToDoDbContext db, int id) => 
 {

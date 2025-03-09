@@ -115,7 +115,11 @@ app.MapPut("/",async (ToDoDbContext db, int id) =>
     var item = db.Items.FirstOrDefault(i => i.Id == id);
     if (item == null)
         return null;
-    item.IsComplete = !item.IsComplete;
+    if(item.IsComplete!=true)
+    item.IsComplete =true;
+    else
+        item.IsComplete =false;
+
     var i =await db.SaveChangesAsync();
     return item.IsComplete!;
 });

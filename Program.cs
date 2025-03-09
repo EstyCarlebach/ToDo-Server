@@ -21,13 +21,21 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
 //swagger
 builder.Services.AddOpenApi();
 //cors
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowSpecificOrigin",
+//         builder => builder.WithOrigins("http://localhost:3000")
+//                           .AllowAnyMethod()
+//                           .AllowAnyHeader());
+// });
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:3000")
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder.AllowAnyOrigin()
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
+
 //הוספת אופצית הזדהות בסווגר
 builder.Services.AddSwaggerGen(options =>
 {
@@ -79,7 +87,8 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddControllers();
 var app = builder.Build();
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("AllowAllOrigins");
+// app.UseCors("AllowSpecificOrigin");
 // if (app.Environment.IsDevelopment())
 // {
     app.UseSwagger();

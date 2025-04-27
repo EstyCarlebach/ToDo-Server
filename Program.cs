@@ -21,13 +21,6 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
 //swagger
 builder.Services.AddOpenApi();
 //cors
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy("AllowSpecificOrigin",
-//         builder => builder.WithOrigins("http://localhost:3000")
-//                           .AllowAnyMethod()
-//                           .AllowAnyHeader());
-// });
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -72,7 +65,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
      options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
  })
- .AddJwtBearer(options =>
+ .AddJwtBearer(options =>   
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -88,12 +81,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 var app = builder.Build();
 app.UseCors("AllowAllOrigins");
-// app.UseCors("AllowSpecificOrigin");
-// if (app.Environment.IsDevelopment())
-// {
+
     app.UseSwagger();
     app.UseSwaggerUI();
-// }
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

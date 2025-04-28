@@ -11,8 +11,5 @@ public partial class User
 
     public string? Password { get; set; }
 
-    public User()
-    {
-        
-    }
+
 }
